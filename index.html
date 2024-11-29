@@ -52,12 +52,12 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/8 CrowdSound.loader.js";
+      var loaderUrl = buildUrl + "/9 URLtest.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/8 CrowdSound.data",
-        frameworkUrl: buildUrl + "/8 CrowdSound.framework.js",
-        codeUrl: buildUrl + "/8 CrowdSound.wasm",
+        dataUrl: buildUrl + "/9 URLtest.data",
+        frameworkUrl: buildUrl + "/9 URLtest.framework.js",
+        codeUrl: buildUrl + "/9 URLtest.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "OptimizationTest",
@@ -110,6 +110,9 @@
         createUnityInstance(canvas, config, (progress) => {
           document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
               }).then((unityInstance) => {
+                unityInstance = instance;
+                // Отправляем URL в Unity
+                unityInstance.SendMessage("GetURLFromJS", "ReceiveURL", window.location.href);
                 document.querySelector("#unity-loading-bar").style.display = "none";
                 document.querySelector("#unity-fullscreen-button").onclick = () => {
                   unityInstance.SetFullscreen(1);
