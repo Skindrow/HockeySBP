@@ -52,12 +52,12 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/9 URLtest.loader.js";
+      var loaderUrl = buildUrl + "/10UrlTestFixed.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/9 URLtest.data",
-        frameworkUrl: buildUrl + "/9 URLtest.framework.js",
-        codeUrl: buildUrl + "/9 URLtest.wasm",
+        dataUrl: buildUrl + "/10UrlTestFixed.data",
+        frameworkUrl: buildUrl + "/10UrlTestFixed.framework.js",
+        codeUrl: buildUrl + "/10UrlTestFixed.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "OptimizationTest",
@@ -110,9 +110,7 @@
         createUnityInstance(canvas, config, (progress) => {
           document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
               }).then((unityInstance) => {
-                unityInstance = instance;
-                // Отправляем URL в Unity
-                unityInstance.SendMessage("GetURLFromJS", "ReceiveURL", window.location.href);
+                window.unityInstance.SendMessage("GetURLFromJS", "ReceiveURL", window.location.href);
                 document.querySelector("#unity-loading-bar").style.display = "none";
                 document.querySelector("#unity-fullscreen-button").onclick = () => {
                   unityInstance.SetFullscreen(1);
